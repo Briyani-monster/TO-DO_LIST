@@ -26,25 +26,36 @@ let closeID = ()=> {
     return 'CL' +Math.random().toString(36).substr(2, 9);
 };
 let li;
-// let data=getUpdate();
-li={};
-// console.log(li);
-// if(data.length>0){
-//     mydata(li);
-// }
+
+li=JSON.parse(localStorage.getItem('storage'))||{};
+
 let eachdiv={};
+
+for(const myitems in li){
+    let myolderdiv=createolderDiv(li[myitems].id,li[myitems].closeID,li[myitems].text,li[myitems].status);
+    
+    if(li[myitems]["status"]=="notStarted")
+        newdivloc.appendChild(myolderdiv);
+    else if(li[myitems]["status"]=="inProgress")
+        inProgressSection.appendChild(myolderdiv);
+    else if(li[myitems].status=="completed"){
+        myolderdiv.querySelector('.checkbox').checked=true;
+        myolderdiv.querySelector('#editBtn').style.visibility="hidden";
+        completedSection.appendChild(myolderdiv)
+    }
+}
 todos.forEach((todo) => {
-    // todo.addEventListener('mousedown',deletetask);
-  todo.addEventListener("dragstart", dragStart);
-  todo.addEventListener("dragend", dragEnd);
+    
+    todo.addEventListener("dragstart", dragStart);
+    todo.addEventListener("dragend", dragEnd);
 });
 
 function dragStart() {
-  draggableTodo = this;
-  setTimeout(() => {
-    this.style.display = "none";
-  }, 0);
-  console.log("dragStart");
+    draggableTodo = this;
+    setTimeout(() => {
+        this.style.display = "none";
+    }, 0);
+    
 }
 
 function dragEnd(event) {
@@ -67,7 +78,7 @@ function dragEnd(event) {
         }
     
     }
-    console.log(li);
+
     
     draggableTodo = null;
     
@@ -95,12 +106,12 @@ function dragOver(e) {
 function dragEnter() {
     
   this.style.border = "1px dashed #ccc";
-  console.log("dragEnter");
+  
 }
 
 function dragLeave() {
   this.style.border = "none";
-  console.log("dragLeave");
+  
 }
 
 function dragDrop() {
@@ -108,12 +119,12 @@ function dragDrop() {
     this.style.border = "none";
     this.appendChild(draggableTodo);
   
-  console.log("dropped");
+
 }
 // update status of location by this
 function correctloc(target,text){
     li[target.id].status=text;
-    // updatestorage(li);
+   
 }
 
 function createDiv(text){
@@ -133,9 +144,9 @@ function createDiv(text){
     eachdiv['status']='notStarted';
     eachdiv['closeID']=closeid;
     li[id]=eachdiv;
-    // li=[];
-    // updatestorage(li);
+    
     console.log(li);
+
     outer.setAttribute("draggable",true );
     let inner1=document.createElement("DIV");
     inner1.classList.add('drag-circle');
@@ -196,7 +207,7 @@ function createDiv(text){
         inner6.classList.add("hidden");
         inner3.classList.add('hidden');
         inner4.value=newtext;
-        console.log();
+      
         
         inner4.style.position="relative";
         inner4.style.right="20px";
@@ -225,7 +236,7 @@ function createDiv(text){
     outer.appendChild(inner5);
     outer.addEventListener("dragstart", dragStart);
     outer.addEventListener("dragend", dragEnd);
-    
+    update(li);
     return outer;
 }
 
@@ -335,124 +346,119 @@ function removeActive(){
     })
 }
 
-
-
-//////////////backend js
-
-// function createnewDiv(id,closeid,text){
+function update(li){
+    let mylocalData=JSON.stringify(li);
+    localStorage.setItem('storage',mylocalData);
     
-//     let outer=document.createElement("DIV");
-//     let inner3=document.createElement("SPAN");
-//     let inner4=document.createElement('INPUT');
-//     let inner5=document.createElement('BUTTON');
-//     let inner6=document.createElement("BUTTON");
 
-//     outer.classList.add('task');
-//     outer.setAttribute("Id",id);
+}
+
+
+function createolderDiv(id,closeid,text,status){
+
+    let outer=document.createElement("DIV");
+    let inner3=document.createElement("SPAN");
+    let inner4=document.createElement('INPUT');
+    let inner5=document.createElement('BUTTON');
+    let inner6=document.createElement("BUTTON");
+
+    outer.classList.add('task');
+    outer.setAttribute("Id",id);
+    li[id].status=status;
     
-    
-//     // console.log(li);
-//     outer.setAttribute("draggable",true );
-//     let inner1=document.createElement("DIV");
-//     inner1.classList.add('drag-circle');
-//     let inner2=document.createElement("INPUT");
-//     inner2.classList.add('checkbox');
-//     inner2.setAttribute("type","checkbox");
-//     // inner2.setAttribute("checked",false);
-//     inner2.addEventListener('click', ()=> {
-//         let flag=inner2.checked;
-//         if (flag==true) {
-//                 let newtask=inner2.parentElement;
-//                 // newtask=newtask.querySelector('.all-tasks');  
-//                 let target=newtask
-//                 console.log(target);
-//             correctloc(target,"completed");
-//             inner6.style.visibility="hidden";
-//             // btn.style.visibility="hidden";
-//             completedSection.appendChild(newtask);
-//                 console.log("checked");
-//             } else {
-//             inner6.style.visibility="visible";
-//                 console.log("unchecked");
-//                 let newtask=inner2.parentElement;
-//                 let target=newtask
-//                 correctloc(target,"inProgress");
-//                 // newtask=newtask.querySelector('.all-tasks');    
-//                 inProgressSection.appendChild(newtask);
+    console.log(li);
+    outer.setAttribute("draggable",true );
+    let inner1=document.createElement("DIV");
+    inner1.classList.add('drag-circle');
+    let inner2=document.createElement("INPUT");
+    inner2.classList.add('checkbox');
+    inner2.setAttribute("type","checkbox");
+    // inner2.setAttribute("checked",false);
+    inner2.addEventListener('click', ()=> {
+        let flag=inner2.checked;
+        if (flag==true) {
+                let newtask=inner2.parentElement;
+                // newtask=newtask.querySelector('.all-tasks');  
+                let target=newtask
+                console.log(target);
+            correctloc(target,"completed");
+            inner6.style.visibility="hidden";
+            // btn.style.visibility="hidden";
+            completedSection.appendChild(newtask);
+                console.log("checked");
+            } else {
+            inner6.style.visibility="visible";
+                console.log("unchecked");
+                let newtask=inner2.parentElement;
+                let target=newtask
+                correctloc(target,"inProgress");
+                // newtask=newtask.querySelector('.all-tasks');    
+                inProgressSection.appendChild(newtask);
                 
-//             }
-//     });
+            }
+    });
     
-//     inner3.classList.add('task-text');
-//     inner3.setAttribute("id","mainText");
-//     inner3.innerText=text;
-//     inner4.setAttribute("type","text");
-//     inner4.classList.add('text');
-//     inner4.setAttribute("id","text")
-//     inner4.classList.add('hidden');
-//     // <button class="edit" id="editBtn">&#9998;</button>
-//     inner6.classList.add('edit');
-//     inner6.setAttribute("id","editBtn");
-//     inner6.innerText="\u270E";
-//     inner5.classList.add('close');
-//     inner5.setAttribute('id',closeid);
-//     inner5.addEventListener('click',()=>{
-//         console.log("woeks");
-//         let newid=inner5.getAttribute("id");
-//         delete li[id];
-//         console.log(li);
-//         inner5.parentElement.style.display="none";
-//     });
-
-// // editBtn=inner6 text=inner4 maintext=inner3
-
-//     inner5.innerText="\u2716"
-//     inner6.addEventListener('click',(e)=>{
-//         let newtext=inner3.innerText;
-//         inner6.classList.add("hidden");
-//         inner3.classList.add('hidden');
-//         inner4.value=newtext;
-//         console.log();
+    inner3.classList.add('task-text');
+    inner3.setAttribute("id","mainText");
+    inner3.innerText=text;
+    inner4.setAttribute("type","text");
+    inner4.classList.add('text');
+    inner4.setAttribute("id","text")
+    inner4.classList.add('hidden');
+    // <button class="edit" id="editBtn">&#9998;</button>
+    inner6.classList.add('edit');
+    inner6.setAttribute("id","editBtn");
+    inner6.innerText="\u270E";
+    inner5.classList.add('close');
+    inner5.setAttribute('id',closeid);
+    inner5.addEventListener('click',()=>{
         
-//         inner4.style.position="relative";
-//         inner4.style.right="20px";
-//         inner4.classList.remove('hidden');
-//         // editBtn.style.display="flex";  
-//     })
-//     inner4.addEventListener('keyup',(e)=>{
-//         if(e.keyCode==13){
-//             inner4.classList.add('hidden');
-//             inner4.style.position="none";
-//             inner4.style.left="0";
-//             let mytext=inner4.value;
-//             inner6.classList.remove('hidden');
-//             let myid=e.target.parentElement.getAttribute("id");
-//             li[myid]['text']=mytext;
-//             // mainText.style.display="flex";
-//             inner3.innerText=mytext;
-//             inner3.classList.remove("hidden");
-//         }
-//     } )
-//     outer.appendChild(inner1);
-//     outer.appendChild(inner2);
-//     outer.appendChild(inner3);
-//     outer.appendChild(inner4);
-//     outer.appendChild(inner6);
-//     outer.appendChild(inner5);
-//     outer.addEventListener("dragstart", dragStart);
-//     outer.addEventListener("dragend", dragEnd);
+        let newid=inner5.getAttribute("id");
+        delete li[id];
+        console.log(li);
+        inner5.parentElement.style.display="none";
+    });
+
+// editBtn=inner6 text=inner4 maintext=inner3
+
+    inner5.innerText="\u2716"
+    inner6.addEventListener('click',(e)=>{
+        let newtext=inner3.innerText;
+        inner6.classList.add("hidden");
+        inner3.classList.add('hidden');
+        inner4.value=newtext;
+        console.log();
+        
+        inner4.style.position="relative";
+        inner4.style.right="20px";
+        inner4.classList.remove('hidden');
+        // editBtn.style.display="flex";  
+    })
+    inner4.addEventListener('keyup',(e)=>{
+        if(e.keyCode==13){
+            inner4.classList.add('hidden');
+            inner4.style.position="none";
+            inner4.style.left="0";
+            let mytext=inner4.value;
+            inner6.classList.remove('hidden');
+            let myid=e.target.parentElement.getAttribute("id");
+            li[myid]['text']=mytext;
+            // mainText.style.display="flex";
+            inner3.innerText=mytext;
+            inner3.classList.remove("hidden");
+        }
+    } )
+    outer.appendChild(inner1);
+    outer.appendChild(inner2);
+    outer.appendChild(inner3);
+    outer.appendChild(inner4);
+    outer.appendChild(inner6);
+    outer.appendChild(inner5);
+    outer.addEventListener("dragstart", dragStart);
+    outer.addEventListener("dragend", dragEnd);
     
-//     return outer;
-// }
-
-// let setlocalfile=JSON.stringify(li);
-// localStorage.setItem('data',setlocalfile);
-
-// let getLocalFile=JSON.parse(localStorage.getItem('data') );
-
-
-
-// // setInterval(()=>{
-// //     // console.log(li);
-// //     console.log("local:"+getLocalFile);
-// // },4000)
+    return outer;
+}
+setInterval(()=>{
+    update(li);
+},1000)
