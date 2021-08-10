@@ -42,6 +42,8 @@
 > hsla(0, 0%, 95%, 1)
 
 
+># PS: I'm New to javascript so may be this code is looking not so good if you want you can make some updation and implement things in good way you're welcome 
+
 
 
 
