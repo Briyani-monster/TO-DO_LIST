@@ -10,7 +10,12 @@ body{
     justify-content:center;
     align-items: center;
     height:100vh;
-    background: #E5E5E5;
+    /* opacity: 0.6; */
+    background: #654ea3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(140deg, #eaafc8 , #654ea3 );  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(140deg, #eaafc8 , #654ea3 ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
 }
 .container{
     width:50vh;
@@ -31,13 +36,21 @@ body{
     display:flex;
     justify-content:center;
     align-items: center;
+    
+    background: #a8ff78;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(120deg, #78ffd6, #a8ff78);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(120deg, #78ffd6, #a8ff78); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 29px 29px 0 0;
+    background-blend-mode: lighten;
+    overflow:none;
+
 }
 .app-header h1{
     font-family:'Mulish', sans-serif;
     font-weight:700;
     text-transform:uppercase;
     font-size:2.5rem; 
-    color:hsla(0, 0%, 0%, 1);
+    color:rgb(255, 255, 255);
 }
 /* section class common for all */
 .section{
@@ -48,7 +61,8 @@ body{
     
 }
 .section h2{
-    
+    border-top:2px solid rgba(236, 234, 234, 0.308);
+    border-bottom:2px solid rgba(236, 234, 234, 0.308);
     font-weight: 600;
     text-transform:uppercase;
     font-family:'Lato', sans-serif;
@@ -173,6 +187,12 @@ body{
     display:flex;
     justify-content: space-between;
     align-items: center;
+    border-top:3px solid rgba(236, 234, 234, 0.308);
+    border-bottom:3px solid rgba(236, 234, 234, 0.308);
+    background-color:rgba(240, 240, 240, 0.24);
+}
+.completed-header h2{
+    border:none;
 }
 .completed-header .clear-all{
     border: none;
@@ -221,65 +241,49 @@ text-decoration: line-through;
 .footer{
     position: absolute;
     bottom:0;
-
+    padding: 5px;
+    box-sizing: border-box;
     width:100%; 
     height:50px;
     display:flex;
-    justify-content:space-around;
+    border:3px solid rgba(236, 234, 234, 0.308);
     align-items: center;
-    background-color:rgba(240, 236, 236, 0.781);
+    background-color:rgba(255, 255, 255, 0.938);
     border-radius: 0 0 29px 29px ;
 }
 .footer .tabs button{
     border:none;
     background: transparent;
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 700;
     font-family: 'Roboto', sans-serif;
-    font-size:0.45rem;
+    font-size:0.6rem;
     padding: 5px;
-    margin-bottom: 5px;
+    box-sizing: border-box;
+    width:80px;
+    height:20px;
     cursor: pointer;
     transition: color 0.2s ease-out;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer .tabs{
     position: relative;
-    bottom:10px;
-    cursor: pointer;
-}
-.footer .tabs.active{
-    background-color:#Fff;
-    width:60px;
-    height:45px;
     
+    cursor: pointer;
+    width:70px;
+    height:30px;
+    /* padding:0 5px; */
+    margin: 0px 2px;
+}
 
-    position: relative;
-    bottom:20px;
-    border-radius: 0 0 5px 5px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-.footer .tabs.active::after{
-    content: '';
-    position: absolute;
-    width:5px;
-    right:-3px;
-    bottom:-3px;
-    height:30px;
-    border-radius:10px 0  0 20px  ;
-    background-color: rgba(240, 236, 236, 0.781);
-}
-.footer .tabs.active::before{
-    content: '';
-    position: absolute;
-    width:5px;
-    left:-2px;
-    bottom:-3px;
-    height:30px;
-    border-radius:0 10px 30px 0;
-    background-color: rgba(240, 236, 236, 0.781);
+.footer .tabs.active button{
+    background-color:#Fff;
+    border-radius: 10px;
+    
+    border:1px dashed rgb(226, 90, 90);
 }
 
 .hidden{
