@@ -251,17 +251,16 @@ text-decoration: line-through;
 .footer .tabs.active{
     background-color:#Fff;
     width:60px;
-    height:45px;
-    
-
+    height:30px;
     position: relative;
-    bottom:20px;
-    border-radius: 0 0 5px 5px;
+    border-radius: 10px;
+    /* bottom:20px; */
+    border:2px dashed rgb(226, 90, 90);
     display: flex;
     justify-content: center;
     align-items: flex-end;
 }
-.footer .tabs.active::after{
+/* .footer .tabs.active::after{
     content: '';
     position: absolute;
     width:5px;
@@ -270,8 +269,8 @@ text-decoration: line-through;
     height:30px;
     border-radius:10px 0  0 20px  ;
     background-color: rgba(240, 236, 236, 0.781);
-}
-.footer .tabs.active::before{
+} */
+/* .footer .tabs.active::before{
     content: '';
     position: absolute;
     width:5px;
@@ -280,7 +279,8 @@ text-decoration: line-through;
     height:30px;
     border-radius:0 10px 30px 0;
     background-color: rgba(240, 236, 236, 0.781);
-}
+} */
+
 
 .hidden{
     display:none;
