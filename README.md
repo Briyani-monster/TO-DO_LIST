@@ -41,7 +41,8 @@
 * compeleted Task tile border style
 > hsla(0, 0%, 95%, 1)
 
-
+# Some Changes and new Ui is created Now this LOOKs like
+![Image for my Design](images/newui.png)
 ># PS: I'm New to javascript so may be this code is looking not so good if you want you can make some updation and implement things in good way you're welcome 
 
 
