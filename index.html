@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDOist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="todo-container">
+        <header class="header">
+            <h1>TODOist</h1>
+            <form class="form" onsubmit="onSubmitHandler(event);">
+                <input type="text" class="task-name">
+                <input type="submit" value="Add" class="submit">
+            </form>
+            <div class="tabs">
+                <button class="btn tab selected" data-id="all" onclick="onTabHandler(event);">all</button>
+                <button class="btn tab" data-id="notstarted" onclick="onTabHandler(event);">not started</button>
+                <button class="btn tab" data-id="pending" onclick="onTabHandler(event);">pending</button>
+                <button class="btn tab" data-id="completed" onclick="onTabHandler(event);">completed</button>
+            </div>
+        </header>
+        <div class="container">
+            <div class="row row-1 notstarted">
+                <div class="heading">
+                    <h2>not started</h2>
+                    <p class="task-status">10 task</p>
+                </div>
+                <div class="tasks" ondragover="onDragOver(event);" ondrop="onDrop(event);" id="notstarted">
+
+                </div>
+            </div>
+            <div class="row row-2 pending">
+                <div class="heading">
+                    <h2>pending</h2>
+                    <p class="task-status">10 task</p>
+                </div>
+                <div class="tasks" id="pending" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+
+                </div>
+            </div>
+            <div class="row row-3 completed">
+                <div class="heading">
+                    <h2>completed</h2>
+                    <p class="task-status">10 task</p>
+                </div>
+                <div class="tasks" ondragover="onDragOver(event);" ondrop="onDrop(event);" id="completed">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js">
+
+    </script>
+</body>
+
+</html>
