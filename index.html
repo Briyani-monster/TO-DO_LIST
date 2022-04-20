@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>TO DO LIST</title>
+    <title>ToDOist</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <div class="app-header">
-            <h1>to do list</h1>
-        </div>
-        <div class="add-task section" >
-            <h2>add task</h2>
-            <div class="add-task-body">
-                
-                <input type="text"  id="newTodo" placeholder="ENTER NEW TASK HERE ....">
-                <button class="btn " id="buttonAdd" >&plus;</button>
-            
-            </div>
-        </div>
-        <div class="not-started section disable drag" id="one">
-            <h2>not started</h2>
-            <div class="all-tasks" id="notStarted" >
-            </div>
-        </div>
-        <div class="in-progress section  disable drag" id="two">
-            <h2>in progress</h2>
-            <div class="all-tasks" id="InProgress">
-               
-        </div>
-        </div>
-        <div class="completed section disable drag" id="three">
-            <div class="completed-header">
-            <h2>completed</h2>
-            <button class="clear-all">clear all task</button>
-            </div>
-            <div class="all-tasks" id="completedTask">
-        </div>
-        </div>
-        <div class="footer">
-            <div class="tabs active">
-                <button class="tabBtn" id="allTaskTab">&nbsp;&nbsp;all&nbsp;&nbsp;</button>
-            </div>
+
+    <div class="todo-container">
+        <header class="header">
+            <h1>TODOist</h1>
+            <form class="form" onsubmit="onSubmitHandler(event);">
+                <input type="text" class="task-name">
+                <input type="submit" value="Add" class="submit">
+            </form>
             <div class="tabs">
-            <button class="tabBtn" id="notStartTab">not started</button>
+                <button class="btn tab selected" data-id="all" onclick="onTabHandler(event);">all</button>
+                <button class="btn tab" data-id="notstarted" onclick="onTabHandler(event);">not started</button>
+                <button class="btn tab" data-id="pending" onclick="onTabHandler(event);">pending</button>
+                <button class="btn tab" data-id="completed" onclick="onTabHandler(event);">completed</button>
             </div>
-            <div class="tabs">
-            <button class="tabBtn" id="inProgressTab">in progress</button>
+        </header>
+        <div class="container">
+            <div class="row row-1 notstarted">
+                <div class="heading">
+                    <h2>not started</h2>
+                    <p class="task-status">10 task</p>
+                </div>
+                <div class="tasks" ondragover="onDragOver(event);" ondrop="onDrop(event);" id="notstarted">
+
+                </div>
             </div>
-            <div class="tabs">
-            <button class="tabBtn" id="completedTaskTab">completed</button>
+            <div class="row row-2 pending">
+                <div class="heading">
+                    <h2>pending</h2>
+                    <p class="task-status">10 task</p>
+                </div>
+                <div class="tasks" id="pending" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+
+                </div>
+            </div>
+            <div class="row row-3 completed">
+                <div class="heading">
+                    <h2>completed</h2>
+                    <p class="task-status">10 task</p>
+                </div>
+                <div class="tasks" ondragover="onDragOver(event);" ondrop="onDrop(event);" id="completed">
+
+                </div>
             </div>
         </div>
     </div>
-    <!-- <script src="js/data.js"></script> -->
-    <script src="js/script.js"></script>
+    <script src="./script.js">
+
+    </script>
 </body>
+
 </html>
